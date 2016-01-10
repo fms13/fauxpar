@@ -32,39 +32,51 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h3>
-<a id="faux-par" class="anchor" href="#faux-par" aria-hidden="true"><span class="octicon octicon-link"></span></a>Faux-Par</h3>
+<a id="faux-par" class="anchor" href="#faux-par" aria-hidden="true"><span class="octicon octicon-link"></span></a>Faux-Par and Par-Fait</h3>
 
-<p>Many programs require a series of key/value to define their configuration and behavior. For command line programs, these key/value parameters are often read from a text file. It would be so cool, if a tool existed, that generates a GUI for such parameters <i>automatically</i>. Faux-Par tries to accomplish this.</p>
+<p>Many programs require a series of key/value to define their settings needed for their configuration and behavior. For command line programs, these key/value settings are often read from a text file. The Faux-Par classes allow for</p>
+<ul>
+<li>the definition of settings and using the same code</li>
+<li>an automatic GUI generation.
+</li>
+</ul>
+<p>The GUI program is called Par-Fait.</p>
 
 <h3>
-<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Process</h3>
+<a id="process" class="anchor" href="#process" aria-hidden="true"><span class="octicon octicon-link"></span></a>Process</h3>
 
-<p>The C++ program needs to define its required parameters by creating FauxPar objects. In fact, each class can define its own parameters. It implements the static method `FauxPar::FauxPar ExampleClass1::GetFauxPar()`. Here's an example for a float value:</p>
+<p>The C++ program needs to define its required parameters by creating FauxPar objects. In fact, each class can define its own parameters.</p>
 
-<code>FauxPar::FauxPar ExampleClass1::GetFauxPar() {
+<p>Then the Par-Fait GUI polls the objects FauxPar::FauxPar settings and creates the GUI for them automatically.</p>
 
-   FauxPar::FauxPar parameters("Example1");
+<p>This way, all settings have to be defined only once, directly in the program's code. The GUI can then be updated simply by re-compiling it.</p>
 
-   parameters.insert(new FauxPar::ValueFloat("speed"));
+<h3>
+<a id="settings-definition" class="anchor" href="#settings-definition" aria-hidden="true"><span class="octicon octicon-link"></span></a>Settings Definition</h3>
+
+A class implements the method <code>FauxPar::FauxPar ExampleClass1::GetFauxPar()</code>. Here's an example for a float value:</p>
+
+<code>
+FauxPar::FauxPar ExampleClass1::GetFauxPar() {<br>
+
+   FauxPar::FauxPar parameters("Example1");<br>
+
+   parameters.insert(new FauxPar::ValueFloat("speed"));<br>
    
-   return parameters;
+   return parameters;<br>
 }
 </code>
 
-<h3>
-<a id="creating-pages-manually" class="anchor" href="#creating-pages-manually" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating pages manually</h3>
+<p>In the case of the <code>FauxPar::ValueFloat</code> object also allows for setting allowed minimum and maximum values for the setting. Other possible setting types will comprise e.g. integers, strings, and also groups and lists of such types.</p>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>The Faux-Par library can offer different interfaces to methods on how to read and parse such settings. One possibilty is the use of the libconfig library.</p>
 
-<h3>
-<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor’s GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
 
 <h3>
-<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<a id="gui-generation" class="anchor" href="#gui-generation" aria-hidden="true"><span class="octicon octicon-link"></span></a>GUI Generation</h3>
 
-<p>Having trouble with Pages? Check out our <a href="https://help.github.com/pages">documentation</a> or <a href="https://github.com/contact">contact support</a> and we’ll help you sort it out.</p>
+<p>The Par-Fait GUI walks through the list of all objects to be configured and creates all required forms by polling the objects' FauxPar::FauxPar settings that it reads from the objects' GetFauxPar() methods.</p>
+
       </section>
     </div>
 
